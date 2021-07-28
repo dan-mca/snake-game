@@ -71,8 +71,12 @@ draw();
 
 // add food randomly to canvas
 function drawFood() {
+    // ctx.fillStyle = 'red';
+    // ctx.fillRect(xFood, yFood, 20, 20);
+    ctx.beginPath();
+    ctx.arc(xFood+10, yFood+10, 10 ,0, 2 * Math.PI);
     ctx.fillStyle = 'red';
-    ctx.fillRect(xFood, yFood, 20, 20);
+    ctx.fill();
 }
 
 // game over text on canvas once game has ended
