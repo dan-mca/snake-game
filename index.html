@@ -23,5 +23,116 @@
     <footer></footer>
 
     <script src="script.js"></script>
+    <!-- <script>
+        
+        // get canvas from html
+        const canvas = document.getElementById('gameCanvas');
+
+        // set canvas context to 2d
+        const ctx = canvas.getContext('2d');
+        
+        // clear canvas
+        function clear() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        
+        // snake class; draw, move and control snake
+        class Snake{
+            constructor(dx, dy) {
+                this.position = [
+                {x: 300, y:150},
+                {x: 290, y:150},
+                {x: 280, y:150},
+                {x: 270, y:150}
+                ];
+                this.dx = dx;
+                this.dy = dy;
+            }
+
+            draw() {
+                this.position.forEach(function (snakePart) {
+                    ctx.fillStyle = 'red';
+                    ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+                })
+            }
+
+            move() {
+            const snakeBody = {
+                x: this.position[0].x + this.dx, 
+                y: this.position[0].y + this.dy};
+            this.position.unshift(snakeBody);
+            this.position.pop();
+            }
+
+
+            controlSnake() {
+                document.addEventListener('keydown', function(event) {
+                    console.log(event);
+                    // IF left arrow pressed and snake is not moving right, move snake 10px right
+                    if(event.key == 'ArrowLeft') {
+                        this.dx = -10;
+                        this.dy = 0;
+                    }
+
+                    // IF right arrow pressed and snake is not moving left, move snake 10px left
+                    if(event.key == 'ArrowRight') {
+                        this.dx = 10;
+                        this.dy = 0;
+                    }
+
+                    // IF up arrow pressed and snake is not moving down, move snake 10px up
+                    if(event.key == 'ArrowUp') {
+                        this.dx = 0;
+                        this.dy = -10;
+                    }
+
+                    // IF down arrow pressend and snake is not moving up, move snake 10px down
+                    if(event.key == 'ArrowDown') {
+                        this.dx = 0;
+                        this.dy = 10;
+                    }
+                })
+            }
+        }
+
+        let snake = new Snake(10, 0); 
+
+        // game over if snake collides with canvas border
+        function gameOver() {
+                if(snake.position[0].x <= 0 || snake.position[0].x >= canvas.width) {
+                    return true;
+                }
+                if(snake.position[0].y <= 0 || snake.position[0].y >= canvas.height) {
+                    return true;
+                }
+            }
+        
+
+        // Game class; update canvas to animate snake movement, set score, game is active
+        class Game {
+            constructor(refreshRate){
+                this.score = 0;
+                this.snake = new Snake(10, 0);
+                this.refreshRate = refreshRate;
+            }
+
+
+            update() {
+                
+                setInterval(function() {
+                    clear();
+                    snake.draw();
+                    snake.move();
+                    snake.controlSnake();
+                    if(gameOver()) return;
+                },this.refreshRate)
+            }
+        }
+
+        let game = new Game(150);
+        game.update();
+
+    </script> -->
 </body>
 </html>

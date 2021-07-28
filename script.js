@@ -4,6 +4,7 @@ const canvas = document.getElementById('gameCanvas');
 // set canvas context to 2d
 const ctx = canvas.getContext('2d');
 
+
 // snake starting co-ordinates
 const snake = [
     {x: 300, y:150},
@@ -115,3 +116,6 @@ function drawFood() {
 // 4. update score and size
 // 5. ability to reset game when game over
 // 6. allow user to set game difficulty - change gameSpeed accordingly
+
+
+
