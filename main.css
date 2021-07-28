@@ -2,6 +2,10 @@
     margin: 0;
 }
 
-canvas {
-    border: 1px solid blue;
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+

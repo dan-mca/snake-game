@@ -8,19 +8,20 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Snake</h1>
     </header>
     <main>
-        <canvas id="gameCanvas" width="600" height="300"></canvas>
-        <div>
+        <canvas id="gameCanvas" class="canvas" width="600" height="600"></canvas>
+        <div class="game-details">
             <p id='score'>Score: 0</p>
             <p id='length'>Snake Length: 4</p>
-            <p id='difficulty'>Difficulty: Easy</p>
-            <button onclick="reset()">Reset</button>
+            
+            <button onclick="drawGame()">Start Game</button>
+            <button onclick="reset()">Play Again</button>
         </div>
     </main>
-    <footer></footer>
+    <footer class="footer"></footer>
 
     <script src="script.js"></script>
     <!-- <script>
