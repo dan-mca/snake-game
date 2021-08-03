@@ -10,6 +10,8 @@ let isActive = 1;
 let gameText = document.getElementById('gameText');
 let gameScoreText = document.getElementById('score');
 let snakeLengthText = document.getElementById('length');
+let resetButton = document.getElementById('resetButton');
+let highScoreText = document.getElementById('topScore');
 
 // snake starting co-ordinates
 let snake = [
@@ -28,6 +30,7 @@ let xFood = 100;
 let yFood = 100;
 
 let gameScore = 0;
+let topScore = [];
 let scoreMultiplier = 1;
 
 // run the game. difficulty determines the game speed and increase in score
@@ -49,11 +52,15 @@ function drawGame() {
     // when game has ended stop and display game over text
     if (isActive === 0) {
         gameText.innerHTML = 'Game Over';
+        resetButton.style.display = 'block';
         clearInterval(game);
+        topScore.push(gameScore);
+        highScoreText.innerHTML = Math.max.apply(null, topScore);
         return;
     } else { 
         gameOver();
         gameText.innerHTML = '';
+        difficultyButtons.style.display = 'none';
         clear();
         draw();
         move();
@@ -144,8 +151,6 @@ document.addEventListener('keydown', function(event) {
 })
 
 
-
-
 // add food randomly to canvas
 function drawFood() {
     ctx.beginPath();
@@ -181,4 +186,9 @@ function reset() {
     gameText.innerHTML = '';
     
     isActive = 1;
+
+    gameText.style.display = 'block';
+    gameText.innerHTML = 'Snake';
+    difficultyButtons.style.display = 'block';
+    resetButton.style.display = 'none';
 }

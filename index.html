@@ -9,31 +9,30 @@
 </head>
 <body>
     <header class="header">
-        <h1>Snake</h1>
     </header>
     <main>
         <div class='game-container'>
-        <canvas id="gameCanvas" class="canvas" width="600" height="600"></canvas>
-        <div class='info-container'>
-            <p id='gameText'>Snake</p>
-            <div class='info-container__difficulty'>
-                <p>Choose a difficulty:</p>
-                <button onclick="startGame(3)">Easy</button>
-                <button onclick="startGame(6)">Normal</button>
-                <button onclick="startGame(10)">Hard</button>
-                <button onclick="startGame(20)">Ninja</button>
-                
+            <div class="game-details">
+                <p>Snake Length: <span id='length'>4</span></p>
+                <p>Score: <span id='score'>0</span></p>
+                <p>High Score: <span id='topScore'>0</span></p>
             </div>
-            <div class='info-container__reset'>
-                <button onclick="reset()">Play again</button>
+            <canvas id="gameCanvas" class="canvas" width="600" height="600"></canvas>
+            <div class='info-container'>
+                <p id='gameText'>Snake</p>
+                <div class='info-container__difficulty' id='difficultyButtons'>
+                    <p>Choose a difficulty:</p>
+                    <button onclick="startGame(3)">Easy</button>
+                    <button onclick="startGame(6)">Normal</button>
+                    <button onclick="startGame(10)">Hard</button>
+                    <button onclick="startGame(20)">Ninja</button>
+                    
+                </div>
+                <div class='info-container__reset' id='resetButton'>
+                    <button onclick="reset()">Play again</button>
+                </div>
             </div>
         </div>
-        
-        <div class="game-details">
-            <p>Score: <span id='score'>0</span></p>
-            <p>Snake Length: <span id='length'>4</span></p>
-        </div>
-    </div>
     </main>
     <footer class="footer"></footer>
 
