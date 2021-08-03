@@ -9,3 +9,7 @@ main {
     align-items: center;
 }
 
+#gameCanvas {
+    background-color: lightgreen;
+}
+

@@ -4,11 +4,15 @@ const canvas = document.getElementById('gameCanvas');
 // set canvas context to 2d
 const ctx = canvas.getContext('2d');
 
+// set canvas colour
 ctx.fillStyle = "lightgreen";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+let game;
+let isActive = 1;
+
 // snake starting co-ordinates
-const snake = [
+let snake = [
     {x: 300, y:160},
     {x: 280, y:160},
     {x: 260, y:160},
@@ -24,27 +28,36 @@ let xFood = 100;
 let yFood = 100;
 
 let gameScore = 0;
-let gameSpeed = 5;
+// let gameSpeed = 2;
 
 let canvasText = 'Game Over';
 let canvasFont ='50px sans-serif'
 
+function startGame(gameSpeed) {
+    game = setInterval(drawGame, 1000/gameSpeed);
+    
+}
+
 // loop the game and functions
 function drawGame() {
+    console.log(isActive);
     // end game and display game over text once snake collides with itself or wall
-    if (gameOver()) {
+    if (isActive === 0) {
         gameOverText();
+        clearInterval(game);
+        console.log('hello');
         return;
+    } else {
+        gameOver();
+        clear();
+        draw();
+        move();
+        drawFood();
+        foodEaten();
+        
+        // console.log(`snake: x:${snake[0].x}, y:${snake[0].y}`);
+        // console.log(`Food: x:${xFood}, y:${yFood}`);
     }
-    clear();
-    draw();
-    move();
-    drawFood();
-    foodEaten();
-    console.log(`snake: x:${snake[0].x}, y:${snake[0].y}`);
-    console.log(`Food: x:${xFood}, y:${yFood}`);
-    setTimeout(drawGame, 1000/gameSpeed);
-    
 }
 
 // clear the canvas
@@ -64,10 +77,6 @@ function drawSnake(snakePart) {
 function draw() {
     snake.forEach(drawSnake);
 }
-
-// show starting position of snake
-draw();
-
 
 // add food randomly to canvas
 function drawFood() {
@@ -90,15 +99,17 @@ function gameOverText() {
 // end game if snake hits canvas border
 function gameOver() {
     for(let i = 4; i < snake.length; i++) {
-        const has_collided = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
-        if (has_collided) 
-            return true;
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+            isActive = 0;
+            return;
+        }
+             
     }
     // IF x < 0 or >= 600 or y <0 or >= 300, end the game
-    if (snake[0].x < 0 || snake[0].x >= canvas.width - 1
-        || snake[0].y < 0 || snake[0].y >= canvas.height) {
-
-        return true;
+    if (snake[0].x <= 0|| snake[0].x >= canvas.width - 20
+        || snake[0].y <= 0 || snake[0].y >= canvas.height - 20 ) {
+        isActive = 0;
+        return;
     }
 }
 
@@ -137,7 +148,7 @@ function move() {
 document.addEventListener('keydown', function(event) {
     //console.log(event);
     if(event.key == 'Enter') {
-        drawGame();
+        isActive = 1;
     }
     
     // IF left arrow pressed and snake is not moving right, move snake 10px right
@@ -166,15 +177,25 @@ document.addEventListener('keydown', function(event) {
 })
 
 
-//drawGame();
+// reset game, snake position and direction
 
+function reset() {
+    clear();
 
-// reset
-// function reset() {
-//     clear();
-//     canvasText = '';
-//     drawGame();
-// }
+    snake = [
+        {x: 300, y:160},
+        {x: 280, y:160},
+        {x: 260, y:160},
+        {x: 240, y:160}
+    ]
+    
+    // horizontal and vertical speed
+    xSpeed = 20;
+    ySpeed = 0;
+    
+    isActive = 1;
+
+}
 // TODO:
 
 // 5. ability to reset game when game over - fix reset() function

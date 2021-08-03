@@ -17,8 +17,8 @@
             <p id='score'>Score: 0</p>
             <p id='length'>Snake Length: 4</p>
             
-            <button onclick="drawGame()">Start Game</button>
-            <button onclick="reset()">Play Again</button>
+            <button onclick="startGame(5)">Start Game</button>
+            <button onclick="reset()">Reset Game</button>
         </div>
     </main>
     <footer class="footer"></footer>
@@ -28,44 +28,36 @@
         
         class Canvas {
             constructor() {
-            // get canvas from html
-                this.canvas = document.getElementById('gameCanvas');
-
-                // set canvas context to 2d
-                this.ctx = this.canvas.getContext('2d');
-                }
-                // clear canvas
+                this.canvas = document.getElementById('gameCanvas'); // get canvas from html
+                this.ctx = this.canvas.getContext('2d'); // set canvas context to 2d
+            }
+        
+            // clear canvas
             clear() {
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             }
         }
-            
+        
         
         // snake class; draw, move and control snake
         class Snake{
             constructor(dx, dy) {
                 this.position = [
-                {x: 300, y:150},
-                {x: 290, y:150},
-                {x: 280, y:150},
-                {x: 270, y:150}
+                {x: 300, y:160},
+                {x: 280, y:160},
+                {x: 260, y:160},
+                {x: 240, y:160}
                 ];
                 this.dx = dx;
                 this.dy = dy;
-                this.canvas = new Canvas();
-                let key = '';
-                this.key = document.addEventListener('keydown', logKey);
-                    function logKey(event) {
-                    key = event.code;
-                        //console.log(` ${event.code}, ${key}`);
-                    }
-            }
+                // this.canvas = new Canvas();
+        }
 
             // draw each sement of the snake
             draw() {
                 this.position.forEach(function (snakePart) {
-                    canvas.ctx.fillStyle = 'red';
-                    canvas.ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+                    canvas.ctx.fillStyle = 'green';
+                    canvas.ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
                 })
             }
 
@@ -82,32 +74,32 @@
             controlSnake(key) {
             
                 // IF left arrow pressed and snake is not moving right, move snake 10px right
-                if(key== 'ArrowLeft' && this.dx != 10) {
-                    this.dx = -10;
+                if(key== 'ArrowLeft' && this.dx != 20) {
+                    this.dx = -20;
                     this.dy = 0;
                 }
 
                 // IF right arrow pressed and snake is not moving left, move snake 10px left
-                if(key == 'ArrowRight' && this.dx != -10) {
-                    this.dx = 10;
+                if(key == 'ArrowRight' && this.dx != -20) {
+                    this.dx = 20;
                     this.dy = 0;
                 }
 
                 // IF up arrow pressed and snake is not moving down, move snake 10px up
-                if(key == 'ArrowUp' && this.dy != 10) {
+                if(key == 'ArrowUp' && this.dy != 20) {
                     this.dx = 0;
-                    this.dy = -10;
+                    this.dy = -20;
                 }
 
                 // IF down arrow pressend and snake is not moving up, move snake 10px down
-                if(key == 'ArrowDown' && this.dy != -10) {
+                if(key == 'ArrowDown' && this.dy != -20) {
                     this.dx = 0;
-                    this.dy = 10;
+                    this.dy = 20;
                 }
             }
         }
 
-        let snake = new Snake(10, 0); 
+        let snake = new Snake(20, 0); 
 
         // game over if snake collides with canvas border
         function gameOver() {
@@ -116,18 +108,45 @@
             if(snake.position[0].x < 0 || snake.position[0].x >= canvas.canvas.width) {
                 return true;
             }
-            if(snake.position[0].y <= 0 || snake.position[0].y >= canvas.canvas.height) {
+            if(snake.position[0].y < 0 || snake.position[0].y >= canvas.canvas.height) {
                 return true;
             }
         }
+
+        class Food {
+            constructor() {
+                this.xFood = 100;
+                this.yFood = 100;
+            }
+
+            drawFood() {
+                canvas.ctx.beginPath();
+                canvas.ctx.arc(this.xFood+10, this.yFood+10, 10 ,0, 2 * Math.PI);
+                canvas.ctx.fillStyle = 'red';
+                canvas.ctx.fill();
+            }
+
+            foodEaten() {
+                if(this.xFood === snake.position[0].x && this.yFood === snake.position[0].y) {
+                    this.xFood = (Math.ceil(Math.floor(Math.random() * canvas.canvas.width)/20)*20)-20;
+                    this.yFood = (Math.ceil(Math.floor(Math.random() * canvas.canvas.height)/20)*20)-20;
+                    return true
+                }
+            }
+        }
         
+        let food = new Food();
 
         // Game class; update canvas to animate snake movement, set score, game speed
         class Game {
             constructor(gameSpeed){
                 this.score = 0;
-                //this.snake = new Snake(10, 0);
                 this.gameSpeed = gameSpeed;
+                this.snake = new Snake(20, 0);
+                // this.food = new Food();
+                document.addEventListener('keydown', function(event) {
+                    snake.controlSnake(event.key);
+                })
             }
 
 
@@ -139,7 +158,8 @@
                     canvas.clear();
                     snake.draw();
                     snake.move();
-                    snake.controlSnake();
+                    // snake.controlSnake();
+                    food.drawFood();
                     if(gameOver()) return;
                     console.log(`x:${snake.position[0].x}, y:${snake.position[0].y}`);
                 },1000/this.gameSpeed)
