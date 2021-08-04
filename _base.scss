@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+$font-body: 'Press Start 2P', cursive;
+
+$color-light-green: #90ee90;
+$color-green: #008000;
+$color-dark-green: #006400;
+$color-red: #ff0000;
+$color-black: #000;
+
+* {
+    margin: 0;
+    font-family: $font-body;
+    color: $color-black;
+}
