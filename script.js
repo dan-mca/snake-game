@@ -121,30 +121,52 @@ function move() {
 
 // control snake with arrow keys
 document.addEventListener('keydown', function(event) {
-    if(event.key == 'Enter') {
-        startGame(6); // start game at normal speed
-    }
-    
-    // IF left arrow pressed and snake is not moving right, move snake 10px right
+    // IF left arrow pressed and snake is not moving right, move snake 20px right
     if(event.key == 'ArrowLeft' && xSpeed != 20) {
         xSpeed = -20;
         ySpeed = 0;
     }
 
-    // IF right arrow pressed and snake is not moving left, move snake 10px left
+    // IF right arrow pressed and snake is not moving left, move snake 20px left
     if(event.key == 'ArrowRight' && xSpeed != -20) {
         xSpeed = 20;
         ySpeed = 0;
     }
 
-    // IF up arrow pressed and snake is not moving down, move snake 10px up
+    // IF up arrow pressed and snake is not moving down, move snake 20px up
     if(event.key == 'ArrowUp' && ySpeed != 20) {
         xSpeed = 0;
         ySpeed = -20;
     }
 
-    // IF down arrow pressend and snake is not moving up, move snake 10px down
+    // IF down arrow pressend and snake is not moving up, move snake 20px down
     if(event.key == 'ArrowDown' && ySpeed != -20) {
+        xSpeed = 0;
+        ySpeed = 20;
+    }
+})
+
+// control snake with buttons 
+document.addEventListener('click', function(event) {
+    let direction = event.target.value;
+    console.log(direction)
+
+    if(direction == 'left' && xSpeed != 20) {
+        xSpeed = -20;
+        ySpeed = 0;
+    }
+
+    if(direction == 'right' && xSpeed != -20) {
+        xSpeed = 20;
+        ySpeed = 0;
+    }
+
+    if(direction == 'up' && ySpeed != 20) {
+        xSpeed = 0;
+        ySpeed = -20;
+    }
+
+    if(direction == 'down' && ySpeed != -20) {
         xSpeed = 0;
         ySpeed = 20;
     }

@@ -29,6 +29,27 @@
   display: none;
 }
 
+.controller {
+  display: grid;
+  grid-template-areas: ". up ." "left . right" ". down .";
+}
+
+.controller-button_up {
+  grid-area: up;
+}
+
+.controller-button_right {
+  grid-area: right;
+}
+
+.controller-button_down {
+  grid-area: down;
+}
+
+.controller-button_left {
+  grid-area: left;
+}
+
 body {
   background-color: #90ee90;
 }
