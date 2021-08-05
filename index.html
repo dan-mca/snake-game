@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
 <body>
     <header class="header">
@@ -17,7 +18,7 @@
                 <p>Score: <span id='score'>0</span></p>
                 <p>High Score: <span id='topScore'>0</span></p>
             </div>
-            <canvas id="gameCanvas" class="canvas" width="600" height="600"></canvas>
+            <canvas id="gameCanvas" class="canvas" ></canvas>
             <div class='info-container'>
                 <p id='gameText' class='game-text'>Snake</p>
                 <div class='info-container__difficulty' id='difficultyButtons'>
@@ -34,10 +35,10 @@
             </div>
         </div>
         <div class='controller'>
-            <button value='up' class='controller-button_up'>Up</button>
-            <button value='right' class='controller-button_right'>Right</button>
-            <button value='down' class='controller-button_down'>Down</button>
-            <button value='left' class='controller-button_left'>Left</button>
+            <button value='up' class='controller-button_up'><i class="fas fa-chevron-up"></i></button>
+            <button value='right' class='controller-button_right'><i class="fas fa-chevron-right"></i></button>
+            <button value='down' class='controller-button_down'><i class="fas fa-chevron-down"></i></button>
+            <button value='left' class='controller-button_left'><i class="fas fa-chevron-left"></i></button>
         </div>
     </main>
     <footer class="footer"></footer>
