@@ -16,9 +16,20 @@
 
 .game-text {
     font-size: 50px;
+    text-align: center;
 }
 
+.info-container__difficulty {
+    text-align: center;
+}
+
+
+
 .info-container__reset {
+    display: none;
+}
+
+.controller-hide {
     display: none;
 }
 
@@ -44,4 +55,18 @@
 
 .controller-button_left {
     grid-area: left;
+}
+
+@media screen and (max-width: 600px) {
+    .game-details,
+    #infoText {
+        font-size: 8px;
+    }
+
+    .info-container__difficulty p, 
+    .info-container__difficulty button,
+    .info-container__reset button{
+        font-size : 10px;
+    }
+
 }

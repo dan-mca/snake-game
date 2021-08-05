@@ -9,11 +9,15 @@ let device;
 let game;
 let isActive = 1;
 
-let gameText = document.getElementById("gameText");
-let gameScoreText = document.getElementById("score");
-let snakeLengthText = document.getElementById("length");
-let resetButton = document.getElementById("resetButton");
-let highScoreText = document.getElementById("topScore");
+const gameText = document.getElementById("gameText");
+const gameScoreText = document.getElementById("score");
+const snakeLengthText = document.getElementById("length");
+const resetButton = document.getElementById("resetButton");
+const highScoreText = document.getElementById("topScore");
+const infoTextElement = document.getElementById('infoText');
+const controller = document.getElementById('controller')
+const controlArrowsText = 'Use your arrow keys to move the snake';
+const controlButtonsText = 'Use the buttons to control the snake';
 
 // snake starting co-ordinates
 let snake = [
@@ -35,30 +39,37 @@ let gameScore = 0;
 let topScore = [];
 let scoreMultiplier = 1;
 
-// get device type and amend
-const canvasDimensions = () => {
+// set the canvas dimensions and show/hide controller based on device type
+const canvasSetup = () => {
   const ua = navigator.userAgent;
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
     ctx.canvas.width = 600;
     ctx.canvas.height = 600;
     device = "tablet";
+    infoTextElement.innerHTML = controlButtonsText;
+    controller.className = 'controller';
   } else if (
     /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
       ua
     )
   ) {
     ctx.canvas.width = 360;
-    ctx.canvas.height = 600;
+    ctx.canvas.height = 360;
     device = "mobile";
+    controller.className = 'controller';
+    infoTextElement.innerHTML = controlButtonsText;
   } else {
     ctx.canvas.width = 600;
     ctx.canvas.height = 600;
     device = "desktop";
+    controller.className = 'controller-hide';
+    infoTextElement.innerHTML = controlArrowsText;
   }
 };
 
-canvasDimensions();
+canvasSetup();
 console.log(`${device}, ${canvas.width}, ${canvas.height}`);
+
 
 // run the game. difficulty determines the game speed and increase in score
 function startGame(gameSpeed) {
@@ -178,7 +189,7 @@ document.addEventListener("keydown", function (event) {
 
 // control snake with buttons
 document.addEventListener("click", function (event) {
-  let direction = event.target.value;
+  let direction = event.target.parentElement.value
   console.log(direction);
 
   if (direction == "left" && xSpeed != 20) {
