@@ -59,6 +59,14 @@
   grid-area: left;
 }
 
+.fab {
+  font-size: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 600px) {
   .game-details,
 #infoText {
@@ -68,6 +76,10 @@
   .info-container__difficulty p,
 .info-container__difficulty button,
 .info-container__reset button {
+    font-size: 10px;
+  }
+
+  .fab {
     font-size: 10px;
   }
 }
@@ -104,4 +116,25 @@ main {
 
 p {
   padding: 1vw;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3rem;
+}
+
+.github {
+  display: flex;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 600px) {
+  .footer {
+    font-size: 8px;
+  }
 }

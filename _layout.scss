@@ -34,3 +34,23 @@ p {
     padding: 1vw;
 }
 
+.footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3rem;
+}
+
+.github {
+    display: flex;
+    align-items: baseline;
+}
+
+@media screen and (max-width: 600px) {
+    .footer{
+        font-size: 8px;
+    }
+}

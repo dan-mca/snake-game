@@ -57,6 +57,15 @@
     grid-area: left;
 }
 
+.fab {
+    font-size: 20px;
+}
+
+button {
+    cursor: pointer;
+}
+
+
 @media screen and (max-width: 600px) {
     .game-details,
     #infoText {
@@ -67,6 +76,10 @@
     .info-container__difficulty button,
     .info-container__reset button{
         font-size : 10px;
+    }
+
+    .fab {
+        font-size: 10px;
     }
 
 }

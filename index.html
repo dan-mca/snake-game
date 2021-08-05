@@ -1,202 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-</head>
-<body>
-    <header class="header">
-    </header>
+    <link rel="stylesheet" href="main.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
     <main>
-        <div class='game-container'>
-            <div class="game-details">
-                <p>Snake Length: <span id='length'>4</span></p>
-                <p>Score: <span id='score'>0</span></p>
-                <p>High Score: <span id='topScore'>0</span></p>
-            </div>
-            <canvas id="gameCanvas" class="canvas" ></canvas>
-            <div class='info-container'>
-                <p id='gameText' class='game-text'>Snake</p>
-                <div class='info-container__difficulty' id='difficultyButtons'>
-                    <p>Choose a difficulty:</p>
-                    <button onclick="startGame(3)">Easy</button>
-                    <button onclick="startGame(6)">Normal</button>
-                    <button onclick="startGame(10)">Hard</button>
-                    <button onclick="startGame(20)">Ninja</button>
-                    
-                </div>
-                <div class='info-container__reset' id='resetButton'>
-                    <button onclick="reset()">Play again</button>
-                </div>
-            </div>
+      <div class="game-container">
+        <div class="game-details">
+          <p>Snake Length: <span id="length">4</span></p>
+          <p>Score: <span id="score">0</span></p>
+          <p>High Score: <span id="topScore">0</span></p>
         </div>
-        <div id='infoText'></div>
-        <div class='controller' id='controller'>
-            <button value='up' class='controller-button_up'><i class="fas fa-chevron-up" value="up"></i></button>
-            <button value='right' class='controller-button_right'><i class="fas fa-chevron-right"></i></button>
-            <button value='down' class='controller-button_down'><i class="fas fa-chevron-down"></i></button>
-            <button value='left' class='controller-button_left'><i class="fas fa-chevron-left"></i></button>
+        <canvas id="gameCanvas" class="canvas"></canvas>
+        <div class="info-container">
+          <h1 id="gameText" class="game-text">Snake</h1>
+          <div class="info-container__difficulty" id="difficultyButtons">
+            <p>Choose a difficulty:</p>
+            <button onclick="startGame(3)">Easy</button>
+            <button onclick="startGame(6)">Normal</button>
+            <button onclick="startGame(10)">Hard</button>
+            <button onclick="startGame(20)">Ninja</button>
+          </div>
+          <div class="info-container__reset" id="resetButton">
+            <button onclick="reset()">Play again</button>
+          </div>
         </div>
+      </div>
+      <div id="infoText"></div>
+      <div class="controller" id="controller">
+        <button value="up" class="controller-button_up">
+          <i class="fas fa-chevron-up" value="up"></i>
+        </button>
+        <button value="right" class="controller-button_right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button value="down" class="controller-button_down">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <button value="left" class="controller-button_left">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
     </main>
-    <footer class="footer"></footer>
+    <footer class="footer">
+      <div><p>Created by Dan McAuley</p></div>
+      <div class='github'>
+        <p>View on GitHub</p>
+        <a href="https://github.com/dan-mca/snake-game" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+    </footer>
 
     <script src="script.js"></script>
-    <!-- <script>
-        
-        class Canvas {
-            constructor() {
-                this.canvas = document.getElementById('gameCanvas'); // get canvas from html
-                this.ctx = this.canvas.getContext('2d'); // set canvas context to 2d
-            }
-        
-            // clear canvas
-            clear() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            }
-        }
-        
-        
-        // snake class; draw, move and control snake
-        class Snake{
-            constructor(dx, dy) {
-                this.position = [
-                {x: 300, y:160},
-                {x: 280, y:160},
-                {x: 260, y:160},
-                {x: 240, y:160}
-                ];
-                this.dx = dx;
-                this.dy = dy;
-                // this.canvas = new Canvas();
-        }
-
-            // draw each sement of the snake
-            draw() {
-                this.position.forEach(function (snakePart) {
-                    canvas.ctx.fillStyle = 'green';
-                    canvas.ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
-                })
-            }
-
-            // move the snake
-            move() {
-            const snakeBody = {
-                x: this.position[0].x + this.dx, 
-                y: this.position[0].y + this.dy};
-            this.position.unshift(snakeBody);
-            this.position.pop();
-            }
-
-            // control the snake with arrow keys
-            controlSnake(key) {
-            
-                // IF left arrow pressed and snake is not moving right, move snake 10px right
-                if(key== 'ArrowLeft' && this.dx != 20) {
-                    this.dx = -20;
-                    this.dy = 0;
-                }
-
-                // IF right arrow pressed and snake is not moving left, move snake 10px left
-                if(key == 'ArrowRight' && this.dx != -20) {
-                    this.dx = 20;
-                    this.dy = 0;
-                }
-
-                // IF up arrow pressed and snake is not moving down, move snake 10px up
-                if(key == 'ArrowUp' && this.dy != 20) {
-                    this.dx = 0;
-                    this.dy = -20;
-                }
-
-                // IF down arrow pressend and snake is not moving up, move snake 10px down
-                if(key == 'ArrowDown' && this.dy != -20) {
-                    this.dx = 0;
-                    this.dy = 20;
-                }
-            }
-        }
-
-        let snake = new Snake(20, 0); 
-
-        // game over if snake collides with canvas border
-        function gameOver() {
-            this.canvas = new Canvas();
-            //this.snake = new Snake(10, 0);
-            if(snake.position[0].x < 0 || snake.position[0].x >= canvas.canvas.width) {
-                return true;
-            }
-            if(snake.position[0].y < 0 || snake.position[0].y >= canvas.canvas.height) {
-                return true;
-            }
-        }
-
-        class Food {
-            constructor() {
-                this.xFood = 100;
-                this.yFood = 100;
-            }
-
-            drawFood() {
-                canvas.ctx.beginPath();
-                canvas.ctx.arc(this.xFood+10, this.yFood+10, 10 ,0, 2 * Math.PI);
-                canvas.ctx.fillStyle = 'red';
-                canvas.ctx.fill();
-            }
-
-            foodEaten() {
-                if(this.xFood === snake.position[0].x && this.yFood === snake.position[0].y) {
-                    this.xFood = (Math.ceil(Math.floor(Math.random() * canvas.canvas.width)/20)*20)-20;
-                    this.yFood = (Math.ceil(Math.floor(Math.random() * canvas.canvas.height)/20)*20)-20;
-                    return true
-                }
-            }
-        }
-        
-        let food = new Food();
-
-        // Game class; update canvas to animate snake movement, set score, game speed
-        class Game {
-            constructor(gameSpeed){
-                this.score = 0;
-                this.gameSpeed = gameSpeed;
-                this.snake = new Snake(20, 0);
-                // this.food = new Food();
-                document.addEventListener('keydown', function(event) {
-                    snake.controlSnake(event.key);
-                })
-            }
-
-
-            drawGame() {
-                
-                if(gameOver()) return;
-
-                setInterval(function() {
-                    canvas.clear();
-                    snake.draw();
-                    snake.move();
-                    // snake.controlSnake();
-                    food.drawFood();
-                    if(gameOver()) return;
-                    console.log(`x:${snake.position[0].x}, y:${snake.position[0].y}`);
-                },1000/this.gameSpeed)
-            }
-
-                // if(gameOver()) return;
-                // canvas.clear();
-                // snake.draw();
-                // snake.move();
-                // setTimeout(this.drawGame, 1000/this.gameSpeed);
-                // console.log(snake.position[0].x);
-            }
-
-        let game = new Game(5);
-        game.drawGame();
-
-    </script> -->
-</body>
+  </body>
 </html>
