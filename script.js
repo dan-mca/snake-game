@@ -14,10 +14,10 @@ const gameScoreText = document.getElementById("score");
 const snakeLengthText = document.getElementById("length");
 const resetButton = document.getElementById("resetButton");
 const highScoreText = document.getElementById("topScore");
-const infoTextElement = document.getElementById('infoText');
-const controller = document.getElementById('controller')
-const controlArrowsText = 'Use your arrow keys to move the snake';
-const controlButtonsText = 'Use the buttons to control the snake';
+const infoTextElement = document.getElementById("infoText");
+const controller = document.getElementById("controller");
+const controlArrowsText = "Use your arrow keys to move the snake";
+const controlButtonsText = "Use the buttons to control the snake";
 
 // snake starting co-ordinates
 let snake = [
@@ -47,7 +47,7 @@ const canvasSetup = () => {
     ctx.canvas.height = 600;
     device = "tablet";
     infoTextElement.innerHTML = controlButtonsText;
-    controller.className = 'controller';
+    controller.className = "controller";
   } else if (
     /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
       ua
@@ -56,20 +56,18 @@ const canvasSetup = () => {
     ctx.canvas.width = 360;
     ctx.canvas.height = 360;
     device = "mobile";
-    controller.className = 'controller';
+    controller.className = "controller";
     infoTextElement.innerHTML = controlButtonsText;
   } else {
     ctx.canvas.width = 600;
     ctx.canvas.height = 600;
     device = "desktop";
-    controller.className = 'controller-hide';
+    controller.className = "controller-hide";
     infoTextElement.innerHTML = controlArrowsText;
   }
 };
 
 canvasSetup();
-console.log(`${device}, ${canvas.width}, ${canvas.height}`);
-
 
 // run the game. difficulty determines the game speed and increase in score
 function startGame(gameSpeed) {
@@ -156,7 +154,7 @@ function move() {
     gameScore += scoreMultiplier;
     gameScoreText.innerHTML = `${gameScore}`;
   } else {
-    snake.pop(); // remove last segment
+    snake.pop(); // remove last segment when food is not eaten
   }
 }
 
@@ -189,7 +187,7 @@ document.addEventListener("keydown", function (event) {
 
 // control snake with buttons
 document.addEventListener("click", function (event) {
-  let direction = event.target.parentElement.value
+  let direction = event.target.parentElement.value;
   console.log(direction);
 
   if (direction == "left" && xSpeed != 20) {
