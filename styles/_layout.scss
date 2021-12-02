@@ -1,5 +1,6 @@
 body {
     background-color: $color-light-green;
+    overflow-y: hidden;
 }
 
 main {
@@ -47,6 +48,7 @@ p {
 .github {
     display: flex;
     align-items: baseline;
+    padding-right: 1rem;
 }
 
 @media screen and (max-width: 600px) {

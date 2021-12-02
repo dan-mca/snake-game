@@ -85,6 +85,7 @@ button {
 }
 body {
   background-color: #90ee90;
+  overflow-y: hidden;
 }
 
 main {
@@ -131,6 +132,7 @@ p {
 .github {
   display: flex;
   align-items: baseline;
+  padding-right: 1rem;
 }
 
 @media screen and (max-width: 600px) {

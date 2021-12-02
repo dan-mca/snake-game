@@ -70,7 +70,7 @@ const canvasSetup = () => {
 canvasSetup();
 
 // run the game. difficulty determines the game speed and increase in score
-function startGame(gameSpeed) {
+const startGame = (gameSpeed) => {
   game = setInterval(drawGame, 1000 / gameSpeed);
   if (gameSpeed == 3) {
     scoreMultiplier = 1;
@@ -84,7 +84,7 @@ function startGame(gameSpeed) {
 }
 
 // game functions in each loop
-function drawGame() {
+const drawGame = () => {
   // when game has ended stop and display game over text
   if (isActive === 0) {
     gameText.innerHTML = "Game Over";
@@ -102,20 +102,20 @@ function drawGame() {
     move();
     drawFood();
     foodEaten();
-    console.log(`${snake[0].x}, ${snake[0].y}`);
+    // console.log(`${snake[0].x}, ${snake[0].y}`);
   }
 }
 
 // draw snake on canvas
-function draw() {
-  snake.forEach(function (snakePart) {
+const draw = () => {
+  snake.forEach((snakePart) => {
     ctx.fillStyle = "green";
     ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
   });
 }
 
 // end game if snake collides with itself or canvas border
-function gameOver() {
+const gameOver = () => {
   for (let i = 4; i < snake.length; i++) {
     if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
       isActive = 0;
@@ -133,7 +133,7 @@ function gameOver() {
 }
 
 // if first segment of snake collides with food, regenerate food in random position
-function foodEaten() {
+const foodEaten = () => {
   if (xFood === snake[0].x && yFood === snake[0].y) {
     xFood = Math.ceil(Math.floor(Math.random() * canvas.width) / 20) * 20 - 20;
     yFood = Math.ceil(Math.floor(Math.random() * canvas.height) / 20) * 20 - 20;
@@ -142,7 +142,7 @@ function foodEaten() {
 }
 
 // move the snake
-function move() {
+const move = () => {
   // add new segment to the front of the snake based on travelling direction
   const snakeBody = { x: snake[0].x + xSpeed, y: snake[0].y + ySpeed };
   snake.unshift(snakeBody);
@@ -188,7 +188,7 @@ document.addEventListener("keydown", function (event) {
 // control snake with buttons
 document.addEventListener("click", function (event) {
   let direction = event.target.parentElement.value;
-  console.log(direction);
+  // console.log(direction);
 
   if (direction == "left" && xSpeed != 20) {
     xSpeed = -20;
@@ -211,8 +211,8 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// add food randomly to canvas
-function drawFood() {
+// draw food as a circle
+const drawFood = () => {
   ctx.beginPath();
   ctx.arc(xFood + 10, yFood + 10, 10, 0, 2 * Math.PI);
   ctx.fillStyle = "red";
@@ -220,13 +220,13 @@ function drawFood() {
 }
 
 // clear the canvas
-function clear() {
+const clear = () => {
   ctx.fillStyle = "lightgreen";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 // reset game; clear canvas and reset default variables
-function reset() {
+const reset = () => {
   clear();
 
   snake = [
